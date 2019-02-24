@@ -7,7 +7,7 @@
     <h3>{{ bbs_obj.title }}</h3>
 
     <br>
-    <p>{{ bbs_obj.content }}</p>
+    <p>{{ bbs_obj.content | safe }}</p>
     <div>
         {% get_comment_count for bbs_obj as comment_count %}
         <span class="glyphicon glyphicon-comment"></span>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 class BBS(models.Model):
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
     summary = models.CharField(max_length=256, blank=True, null=True)
     content = models.TextField()
@@ -19,6 +20,9 @@ class BBS(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=32, unique=True)
     administrator = models.ForeignKey('BBS_user', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class BBS_user(models.Model):

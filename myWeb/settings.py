@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ['*',]     # 填写域名，才能通过域名访问
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
