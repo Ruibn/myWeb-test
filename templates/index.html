@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+<div class="container">
+{% block content %}
+  <!-- Main component for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    {% for bbs in bbs_list %}
+        <a href="detail/{{ bbs.id }}">{{ bbs.title }}</a>
+        <br>
+        {{ bbs.summary }}
+        <hr>
+    {% endfor %}
+  </div>
+{% endblock %}
+</div> <!-- /container -->

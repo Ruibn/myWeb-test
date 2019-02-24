@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load comments %}
+
+
+{% block content %}
+<div>
+    <h3>{{ bbs_obj.title }}</h3>
+
+    <br>
+    <p>{{ bbs_obj.content }}</p>
+    <div>
+        {% get_comment_count for bbs_obj as comment_count %}
+        <span class="glyphicon glyphicon-comment"></span>
+        {{ comment_count }}
+    </div>
+</div>
+<hr>
+<!--{% render_comment_list for bbs_obj %}-->
+    {% get_comment_list for bbs_obj as comment_list %}
+    {% for comment in comment_list reversed %}
+        {{ comment.submit_date }}
+        <br>
+        {{ comment.comment }}
+        <hr>
+    {% endfor %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>评论列表</h4>
+    </div>
+    <div class="panel-body">
+        {% get_comment_list for bbs_obj as comments %}
+        {% for comment in comments %}
+            <div class="blog_comment" name="F{{comment.id}}">
+                <p class="comment_title">
+                    #{{ comment.submit_date|date:"Y-m-d H:i"}} @ {{ comment.id }}：
+                </p>
+                <p class="comment_content">{{ comment.comment }}</p>
+            </div>
+        {% empty %}
+            <span>暂无评论</span>
+        {% endfor %}
+    </div>
+</div>
+<hr>
+<div>
+{% if user.is_authenticated %}
+    <form action="{% comment_form_target %}" method="post">{% csrf_token %}
+        <textarea cols="80px" rows="3px" name="comment_content"></textarea><br>
+        <input type="hidden" name="bbs_id" value="{{ bbs_obj.id }}"/>
+        <input type="submit" value="Add comment" id="id_submit"/>
+    </form>
+{% else %}
+    <p>请先<a href="{% url 'account:user_login' %}">登录</a>后方可评论.</p>
+{% endif %}
+</div>
+{% endblock %}

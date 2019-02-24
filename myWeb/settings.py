@@ -23,9 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2n*nngzr5r6if5hmeja5w#5x-(w_ewsr8q@8p7s#oj(3vrd8!!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+DEBUG = True                 # windows开发模式
 
 ALLOWED_HOSTS = []
+
+# DEBUG = False              # ubuntu生产环境
+
+# ALLOWED_HOSTS = ['*',]     # 填写域名，才能通过域名访问
+
 
 
 # Application definition
@@ -38,8 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',
+    'account',
+    'article',
+    'bbs',
+    'django_comments',
+    'django.contrib.sites',
 ]
-
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,7 +68,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
+        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -80,7 +92,8 @@ DATABASES = {
         'NAME': 'db_test',
         'USER': 'root',
         'PASSWORD': '123456',
-        'HOST': '47.112.7.23',
+        'HOST': '47.112.7.23',          # windows生产环境
+        # 'HOST': '127.0.0.1',          # ubuntu开发模式
         'PORT': '3306',
     }
 }
@@ -123,3 +136,19 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+)
+# STATIC_ROOT = '/home/DjangoWorkspace/myWeb/static/'       # ubuntu生产环境
+STATIC_ROOT = '/static/'                                    # windows开发模式
+LOGIN_REDIRECT_URL = '/'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST_USER = "846235283@qq.com"
+EMAIL_HOST_PASSWORD = "dltgbxgmsyuhbded"
+EMAIL_PORT = 25
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "846235283@qq.com"
