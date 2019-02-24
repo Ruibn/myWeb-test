@@ -8,16 +8,15 @@
 </div>
 <div class="row">
     <div class="col-xs-12 col-md-8">
-        <ul>
-            {% for blog in blogs %}
-                <li><a href="{{ blog.id }}">{{ blog.title }}</a></li>
-            {% endfor %}
-        </ul>
+        {% for blog in blogs %}
+            <h5><a href="{{ blog.id }}">{{ blog.title }}</a></h5>
+            <hr>
+        {% endfor %}
     </div>
     <div class="col-xs-6 col-md-4">
-        <h2>广告</h2>
-        <p>ruibn的网站47.112.7.23</p>
-        <img width="200px" src="http://www.mrwallpaper.com/wallpapers/Fluffy-Cat.jpg">
+        <h2>固定板块</h2>
+        <p>详情欢迎访问47.112.7.23</p>
+        <img width="100px" src="/static/images/background.gif">
     </div>
 </div>
 {% endblock %}
